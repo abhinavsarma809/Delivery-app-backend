@@ -11,7 +11,7 @@ const imageRoutes = require('./api/image');
 
 const cors = require("cors");
 app.use(cors({
-    origin: "https://meek-cucurucho-01a714.netlify.app"
+    origin: "https://deliveryapp-front-9mw9.vercel.app/"
 }));
 
 app.listen(PORT,()=>{
