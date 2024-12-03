@@ -11,7 +11,7 @@ const imageRoutes = require('./api/image');
 
 const cors = require("cors");
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "*"
 }));
 
 app.listen(PORT,()=>{
