@@ -11,7 +11,7 @@ const imageRoutes = require('./api/image');
 
 const cors = require("cors");
 app.use(cors({
-    origin: "*"
+    origin: "https://deliveryapp-front-a5y5.vercel.app"
 }));
 
 app.listen(PORT,()=>{
