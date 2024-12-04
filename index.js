@@ -11,7 +11,7 @@ const foodRoutes = require('./api/home')
 
 const cors = require("cors");
 app.use(cors({
-    origin: "*"
+    origin: "https://deliveryapp-front-9mw9.vercel.app"
 }));
 
 app.listen(PORT,()=>{
