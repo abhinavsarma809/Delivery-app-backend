@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
 const userRoutes = require('./api/user');
 const foodRoutes = require('./api/home')
-const imageRoutes = require('./api/image');
+
 
 const cors = require("cors");
 app.use(cors({
-    origin: "https://deliveryapp-front-9mw9.vercel.app/"
+    origin: "*"
 }));
 
 app.listen(PORT,()=>{
@@ -26,5 +26,5 @@ app.get("/",(req,res)=>{
 app.use(express.json());
 app.use("/api/user",userRoutes);
 app.use("/api/food",foodRoutes);
-app.use("/api/image",imageRoutes);
+
 
