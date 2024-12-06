@@ -1,5 +1,6 @@
 const express=require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const User = require('../Schemas/userSchema.js');
 const Food = require('../Schemas/foodSchema.js');
 const { isLoggedIn } = require("../middleware/auth");
@@ -19,7 +20,7 @@ router.post('/',isLoggedIn,async(req,res)=>{
 
 });
 
-router.post('/:id',async(req,res)=>{
+router.put('/:id',async(req,res)=>{
     try{
         const {title,description,price} = req.body;
         const user = await User.findOne({email:req.user.email});
@@ -49,18 +50,27 @@ router.get("/", async (req, res) => {   // query params
     food = await Food.find({title:{$regex:query,$options:"i"}}).sort({createAt:-1})
     return res.status(200).json(food);
 });
-router.get("/:id",async(req,res)=>{
-    try{
-        const food = await Food.findOne(req.params.id);
-        if(!food){
-            res.status(400).json({message:"food data not found"});
-            return
-        }
-        return res.status(200).json(food);
+router.get("/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+  
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid food ID" });
+      }
+  
+      // Find the food item by its ID
+      const food = await Food.findById(id); // Use findById for querying by _id
+  
+      if (!food) {
+        return res.status(404).json({ message: "Food data not found" });
+      }
+  
+      return res.status(200).json(food);
+    } catch (error) {
+      console.error("Server error:", error.message);
+      res.status(500).json({ message: "Server error" });
     }
-    catch(error){
-        res.status(500).json({message:"server errro"});
-    }
-})
+  });
 
 module.exports=router;

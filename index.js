@@ -15,13 +15,16 @@ const foodRoutes = require('./api/home')
 app.use(cors({
     origin: "*"
 }));
+mongoose.connect(MONGO_URL)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
 app.use(express.json());
-app.listen(PORT,()=>{
-
-    console.log(PORT);
-    mongoose.connect(MONGO_URL).then(()=>console.log('connected to mongoose')).catch((err)=>console.log(err))
-})
-
 app.get("/",(req,res)=>{
     res.send("Hello World");
 })
