@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const env = require("dotenv");
 env.config();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL;
 const userRoutes = require('./api/user');
 const foodRoutes = require('./api/home')
