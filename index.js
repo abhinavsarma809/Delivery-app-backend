@@ -3,17 +3,19 @@ const express = require("express");
 const app = express();
 const env = require("dotenv");
 env.config();
+const cors = require("cors");
+
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL;
 const userRoutes = require('./api/user');
 const foodRoutes = require('./api/home')
 
 
-const cors = require("cors");
+
 app.use(cors({
     origin: "*"
 }));
-
+app.use(express.json());
 app.listen(PORT,()=>{
 
     console.log(PORT);
@@ -23,7 +25,7 @@ app.listen(PORT,()=>{
 app.get("/",(req,res)=>{
     res.send("Hello World");
 })
-app.use(express.json());
+
 app.use("/api/user",userRoutes);
 app.use("/api/food",foodRoutes);
 
