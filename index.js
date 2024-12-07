@@ -17,10 +17,10 @@ app.use(cors({
 
 app.use(express.json());
 
-mongoose.connect(MONGO_URL)
-  .then(() => console.log("Connected to MongoDB",process.env.MONGO_URL))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
+app.listen(PORT,()=>{
+    console.log(`server is running in${PORT}`);
+    mongoose.connect(MONGO_URL).then(()=>console.log("connected to mongoose")).catch((err)=> console.log(err));
+});
 
 app.get("/", (req, res) => {
     res.send("Hello World");
@@ -31,8 +31,3 @@ app.use("/api/user", userRoutes);
 app.use("/api/food", foodRoutes);
 
 
-mongoose.connection.once('open', () => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-});
