@@ -29,11 +29,11 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
-// API routes
+
 app.use("/api/user", userRoutes);
 app.use("/api/food", foodRoutes);
 
-// Start the server after the MongoDB connection is successful
+
 mongoose.connection.once('open', () => {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
