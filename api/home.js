@@ -1,9 +1,9 @@
 const express=require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const User = require('../Schemas/userSchema.js');
-const Food = require('../Schemas/foodSchema.js');
-const { isLoggedIn } = require("../middleware/auth");
+const User = require('../../Schemas/userSchema.js');
+const Food = require('../../Schemas/foodSchema.js');
+const { isLoggedIn } = require("../../middleware/auth.js");
 
 router.post('/',isLoggedIn,async(req,res)=>{
     try{
