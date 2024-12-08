@@ -8,8 +8,8 @@ env.config();
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_URL;
-const userRoutes = require('./backend/api/user');
-const foodRoutes = require('./backend/api/home');
+const userRoutes = require('./api/user');
+const foodRoutes = require('./api/home');
 
 app.use(cors({
     origin: "*"
