@@ -1,8 +1,0 @@
-{
-    "version": 2,
-    "routes": [
-      { "src": "/api/user/(.*)", "dest": "api/user.js" },
-      { "src": "/api/food/(.*)", "dest": "api/home.js" }
-    ]
-}
-  
