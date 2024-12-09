@@ -72,7 +72,4 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-  module.exports = (req, res) => {
-    res.status(200).json({ message: "Food API is working!" });
-  };
-  
+  module.exports = router;
