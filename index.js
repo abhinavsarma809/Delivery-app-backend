@@ -15,11 +15,12 @@ const MONGO_URL = process.env.MONGO_URL;
 app.use(cors({
     origin: "*"
 }));
+app.use(express.json());
 app.listen(Port,()=>{
     console.log(`Server is running on port ${Port}`);
     mongoose.connect(MONGO_URL).then(()=>console.log("connected to mongoose")).catch((err)=>console.log(err));
 })
-app.use(express.json());
+
 
 app.get("/", (req, res) => {
     res.send("Hello World");
