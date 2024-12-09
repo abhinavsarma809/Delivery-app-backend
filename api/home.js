@@ -59,9 +59,8 @@ router.get("/:id", async (req, res) => {
         return res.status(400).json({ message: "Invalid food ID" });
       }
   
-      // Find the food item by its ID
-      const food = await Food.findById(id); // Use findById for querying by _id
   
+      const food = await Food.findById(id); 
       if (!food) {
         return res.status(404).json({ message: "Food data not found" });
       }
@@ -73,4 +72,6 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-  module.exports = router;
+  module.exports = async (req, res) => {
+    await router(req, res);
+};
