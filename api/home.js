@@ -73,4 +73,7 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-module.exports=router;
+  module.exports = async (req, res) => {
+    // Pass the request to Express router
+    await router(req, res);
+};
