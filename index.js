@@ -1,43 +1,30 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const userRoutes = require('./user');
-const foodRoutes = require('./food');
-require('dotenv').config();
-
+const mongoose = require("mongoose");
+const express = require("express");
 const app = express();
+const env = require("dotenv");
+const cors = require("cors");
+const Port = process.env.Port||3000;
+const userRoutes = require('./api/user');
+const foodRoutes = require('./api/home');
 
-// Middleware
+env.config();
+
+const MONGO_URL = process.env.MONGO_URL;
+
+
+app.use(cors({
+    origin: "*"
+}));
+app.listen(Port,()=>{
+    console.log(`Server is running on port ${Port}`);
+    mongoose.connect(MONGO_URL).then(()=>console.log("connected to mongoose")).catch((err)=>console.log(err));
+})
 app.use(express.json());
 
-// Routes
-app.use('/api/user', userRoutes);
-app.use('/api/food', foodRoutes);
-
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error:', err));
-
-// Default Route
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
-app.get('/api/test-db', async (req, res) => {
-    try {
-      const result = await mongoose.connection.db.admin().ping();
-      res.status(200).json({ message: 'MongoDB connected', result });
-    } catch (error) {
-      res.status(500).json({ message: 'MongoDB connection error', error });
-    }
-  });
-  
-// Handle 404 for undefined routes
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+app.get("/", (req, res) => {
+    res.send("Hello World");
 });
 
-// Export for Vercel
-module.exports = (req, res) => {
-  app(req, res); // Adapts Express for Vercel's serverless environment
-};
+app.use("/api/user", userRoutes);
+app.use("/api/food", foodRoutes);
+
