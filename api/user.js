@@ -92,7 +92,4 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-module.exports = async (req, res) => {
-
-    await router(req, res);
-};
+module.exports = router;
