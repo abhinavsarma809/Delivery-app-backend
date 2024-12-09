@@ -6,8 +6,8 @@
     { "src": "api/home.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/user", "dest": "/api/user.js" },
-    { "src": "/api/home", "dest": "/api/home.js" },
+    { "src": "/api/user", "dest": "/index.js" },
+    { "src": "/api/food", "dest": "/index.js" },
     { "src": "/", "dest": "/index.js" }
   ]
 }
