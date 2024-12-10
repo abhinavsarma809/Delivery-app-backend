@@ -1,7 +1,7 @@
 const express=require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const User = require('../Schemas/userSchema.js'); // Adjust the path as needed
+const User = require('../Schemas/userSchema.js'); 
 
 const Food = require('../Schemas/foodSchema.js');
 const { isLoggedIn } = require("../middleware/auth.js");
@@ -43,14 +43,18 @@ router.put('/:id',async(req,res)=>{
     }
 });
 
-router.get("/", async (req, res) => {   // query params 
-    let food = [];
-    const query = req.query.search||"";
-    const offset = req.query.offset || 0;
-    const limit = req.query.limit || 2;
-    food = await Food.find({title:{$regex:query,$options:"i"}}).sort({createAt:-1})
-    return res.status(200).json(food);
+router.get("/", async (req, res) => {
+  try {
+      console.log("Query Params:", req.query);
+      const food = await Food.find({ title: { $regex: req.query.search || "", $options: "i" } }).sort({ createdAt: -1 });
+      console.log("Food Data:", food);
+      res.status(200).json(food);
+  } catch (error) {
+      console.error("GET / Error:", error.message);
+      res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
+
 router.get("/:id", async (req, res) => {
     try {
       const { id } = req.params;
@@ -72,5 +76,11 @@ router.get("/:id", async (req, res) => {
       res.status(500).json({ message: "Server error" });
     }
   });
+  router.get("/test-env", (req, res) => {
+    res.status(200).json({
+        JWT_SECRET: process.env.JWT_SECRET ? "Loaded" : "Not Loaded",
+        MONGO_URI: process.env.MONGO_URI ? "Loaded" : "Not Loaded",
+    });
+});
 
   module.exports = router;
