@@ -25,6 +25,12 @@ app.listen(Port,()=>{
 app.get("/", (req, res) => {
     res.send("Hello World");
 });
+app.get("/test-env", (req, res) => {
+    res.status(200).json({
+        JWT_SECRET: process.env.JWT_SECRET ? "Loaded" : "Not Loaded",
+        MONGO_URI: process.env.MONGO_URI ? "Loaded" : "Not Loaded",
+    });
+});
 
 app.use("/api/user", userRoutes);
 app.use("/api/food", foodRoutes);

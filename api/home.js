@@ -76,11 +76,6 @@ router.get("/:id", async (req, res) => {
       res.status(500).json({ message: "Server error" });
     }
   });
-  router.get("/test-env", (req, res) => {
-    res.status(200).json({
-        JWT_SECRET: process.env.JWT_SECRET ? "Loaded" : "Not Loaded",
-        MONGO_URI: process.env.MONGO_URI ? "Loaded" : "Not Loaded",
-    });
-});
+  
 
   module.exports = router;
