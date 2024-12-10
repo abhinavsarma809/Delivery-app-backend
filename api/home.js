@@ -10,7 +10,7 @@ router.post('/',isLoggedIn,async(req,res)=>{
     try{
     const {title,description,price} = req.body;
     const user = await User.findOne({email:req.user.email});
-    const newFood = new Food({title,description,price,userId:user._id}).save();
+    const newFood = await new Food({title,description,price,userId:user._id}).save();
     return res.status(200).json({message:"food menu created successfully",id:newFood._id});
     }
     catch (error){
