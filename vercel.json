@@ -1,11 +1,13 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.js", "use": "@vercel/node" }
+    { "src": "index.js", "use": "@vercel/node" },
+    { "src": "user.js", "use": "@vercel/node" },
+    { "src": "home.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/user/(.*)", "dest": "api/user.js" },
-    { "src": "/api/food/(.*)", "dest": "api/home.js" },
-    { "src": "/(.*)", "dest": "index.js" }
+    { "src": "/api/user", "dest": "api/user.js" },
+    { "src": "/api/food", "dest": "api/home.js" },
+    { "src": "/(*)", "dest": "index.js" }
   ]
 }
