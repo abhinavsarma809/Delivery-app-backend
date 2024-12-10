@@ -1,6 +1,7 @@
 const express=require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const User = require('../Schemas/userSchema.js'); // Adjust the path as needed
 
 const Food = require('../Schemas/foodSchema.js');
 const { isLoggedIn } = require("../middleware/auth.js");
