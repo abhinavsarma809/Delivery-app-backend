@@ -48,6 +48,7 @@ router.get("/", async (req, res) => {
       console.log("Query Params:", req.query);
       const food = await Food.find({ title: { $regex: req.query.search || "", $options: "i" } }).sort({ createdAt: -1 });
       console.log("Food Data:", food);
+      res.json({ message: 'Food API is working!' });
       res.status(200).json(food);
   } catch (error) {
       console.error("GET / Error:", error.message);
