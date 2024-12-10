@@ -18,9 +18,7 @@ app.use(cors({
 app.use(express.json());
 app.listen(Port,()=>{
     console.log(`Server is running on port ${Port}`);
-    mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected successfully'))
-    .catch((err) => console.error('MongoDB connection error:', err));
+    mongoose.connect(MONGO_URL).then(()=>console.log("connected to mongoose")).catch((err)=>console.log(err));
 })
 
 
