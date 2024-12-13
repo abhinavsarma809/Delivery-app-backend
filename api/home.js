@@ -4,13 +4,11 @@ const User = require("../Schemas/userSchema.js");
 const Food = require("../Schemas/foodSchema.js");
 const { isLoggedIn } = require("../middleware/auth.js");
 
-// Create an Express app
 const app = express();
 
-// Middleware for JSON parsing
+
 app.use(express.json());
 
-// Routes
 app.post("/", isLoggedIn, async (req, res) => {
   try {
     const { title, description, price } = req.body;
@@ -74,5 +72,5 @@ app.get("/:id", async (req, res) => {
   }
 });
 
-// Export the app as a handler
+
 module.exports = app;
