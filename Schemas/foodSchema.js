@@ -1,26 +1,24 @@
 const mongoose = require('mongoose');
-
 const FoodSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        index: true, // Add an index for title to improve search speed
+    title:{
+        type:String,
+        required:true
     },
-    description: {
-        type: String,
-        required: true,
+    description:{
+        type:String,
+        required:true
     },
-    price: {
-        type: Number, // Change to Number for better numeric operations
-        required: true,
+    price:{
+        type:String,
+        required:true
     },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-}, {
-    timestamps: true, // Automatically add createdAt and updatedAt timestamps
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true,
+    }
+    
+
 });
 
-module.exports = mongoose.model('Food', FoodSchema);
+module.exports = mongoose.model('food',FoodSchema)

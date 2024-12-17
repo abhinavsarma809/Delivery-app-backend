@@ -26,7 +26,7 @@ app.get("/mongo-test", async (req, res) => {
     const connection = await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS:10000,, 
+      serverSelectionTimeoutMS: 20000, 
       socketTimeoutMS: 45000,
     });
     console.log("MongoDB connected:", connection.connection.host);
