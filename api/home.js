@@ -46,8 +46,8 @@ app.get("/", async (req, res) => {
     console.log("Query Params:", req.query);
     const food = await Food.find({ title: { $regex: req.query.search || "", $options: "i" } })
     .sort({ createdAt: -1 })
-    .limit(20) 
-    .lean();
+    .limit(20) // Limit the number of results
+    .lean(); // Return plain JavaScript objects
   
     console.log("Food Data:", food);
     res.status(200).json(food);
