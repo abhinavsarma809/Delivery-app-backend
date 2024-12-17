@@ -27,6 +27,7 @@ app.get("/mongo-test", async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000, 
+      socketTimeoutMS: 45000,
     });
     console.log("MongoDB connected:", connection.connection.host);
     res.status(200).json({ message: "MongoDB connected successfully" });
