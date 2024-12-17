@@ -21,13 +21,12 @@ app.use(
 
 app.use(express.json());
 
-// Debugging Route for MongoDB
 app.get("/mongo-test", async (req, res) => {
   try {
     const connection = await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+      serverSelectionTimeoutMS: 5000, 
     });
     console.log("MongoDB connected:", connection.connection.host);
     res.status(200).json({ message: "MongoDB connected successfully" });
@@ -37,12 +36,11 @@ app.get("/mongo-test", async (req, res) => {
   }
 });
 
-// Main route for testing
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-// Environment variable check
 app.get("/test-env", (req, res) => {
   res.status(200).json({
     JWT_SECRET: process.env.JWT_SECRET ? "Loaded" : "Not Loaded",

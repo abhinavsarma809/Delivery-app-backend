@@ -41,6 +41,7 @@ app.put("/:id", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
+  console.log("Request received: GET /api/food");
   try {
     console.log("Query Params:", req.query);
     const food = await Food.find({ title: { $regex: req.query.search || "", $options: "i" } }).sort({ createdAt: -1 });
