@@ -13,7 +13,7 @@ const MONGO_URL = process.env.MONGO_URL;
 
 app.use(
   cors({
-    origin: "https://deliveryapp-front-9mw9.vercel.app/",
+    origin: "https://deliveryapp-front-9mw9.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
