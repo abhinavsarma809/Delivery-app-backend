@@ -13,7 +13,7 @@ const MONGO_URL = process.env.MONGO_URL;
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://deliveryapp-front-9mw9.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -46,7 +46,7 @@ app.get("/test-env", (req, res) => {
   });
 });
 
-// Application routes
+
 app.use("/api/user", userRoutes);
 app.use("/api/food", foodRoutes);
 
