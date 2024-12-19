@@ -21,21 +21,18 @@ app.use(
 
 app.use(express.json());
 
-app.get("/mongo-test", async (req, res) => {
-  try {
-    const connection = await mongoose.connect(MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 20000, 
-      socketTimeoutMS: 45000,
-    });
-    console.log("MongoDB connected:", connection.connection.host);
-    res.status(200).json({ message: "MongoDB connected successfully" });
-  } catch (err) {
-    console.error("MongoDB connection failed:", err);
-    res.status(500).json({ error: "Failed to connect to MongoDB", details: err.message });
-  }
-});
+
+mongoose
+  .connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 10000, 
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err.message);
+    process.exit(1); // Exit process if the connection fails
+  });
 
 
 app.get("/", (req, res) => {
