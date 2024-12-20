@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const app = express();
 const User = require('../Schemas/userSchema');
 const bcrypt = require('bcryptjs');  
 const env = require('dotenv');
@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 env.config();
 
-router.post("/signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
     try {
         const { email, name, password, gender, country } = req.body;
         const UserExist = await User.findOne({ email });
@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-router.post("/signin", async (req, res) => {
+app.post("/signin", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -62,7 +62,7 @@ router.post("/signin", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
     try {
         const { email, name, country, gender } = req.body;
         const userId = req.params.id;
@@ -92,4 +92,4 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = app;

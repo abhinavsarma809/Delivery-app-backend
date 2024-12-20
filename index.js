@@ -31,7 +31,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => {
     console.error("MongoDB connection error:", err.message);
-    process.exit(1); // Exit process if the connection fails
+    process.exit(1); 
   });
 
 
@@ -50,7 +50,7 @@ app.get("/test-env", (req, res) => {
 app.use("/api/user", userRoutes);
 app.use("/api/food", foodRoutes);
 
-// Start the server
+
 app.listen(Port, () => {
   console.log(`Server is running on port ${Port}`);
 });
