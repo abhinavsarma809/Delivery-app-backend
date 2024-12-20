@@ -7,6 +7,7 @@
     ],
     "routes": [
       { "src": "/api/food/(.*)", "dest": "api/home.js" },
+      { "src": "/api/food/([a-fA-F0-9]{24})", "dest": "api/home.js" },
       { "src": "/api/user/(.*)", "dest": "api/user.js" },
       { "src": "/(.*)", "dest": "index.js" }
     ]
