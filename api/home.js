@@ -58,24 +58,25 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
+  console.log("ID:", req.params.id);
+  console.log("Mongo URI:", process.env.MONGO_URI);
+
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ message: "Invalid food ID" });
+  }
+
   try {
-    const { id } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid food ID" });
-    }
-
-    const food = await Food.findById(id);
+    const food = await Food.findById(req.params.id);
     if (!food) {
       return res.status(404).json({ message: "Food data not found" });
     }
-
     return res.status(200).json(food);
   } catch (error) {
-    console.error("Server error:", error.message);
-    res.status(500).json({ message: "Server error" });
+    console.error("Error fetching food by ID:", error.message);
+    return res.status(500).json({ message: "Server error", error: error.message });
   }
 });
+
 
 
 module.exports = app;
