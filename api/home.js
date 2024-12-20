@@ -57,9 +57,9 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/:id", async (req, res) => {
-  console.log("ID:", req.params.id);
-  console.log("Mongo URI:", process.env.MONGO_URI);
+app.get("/:id",async (req, res) => {
+  console.log("Request path:", req.path);  // This should show the full path
+  console.log("Request params:", req.params);  // This should show the ID
 
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ message: "Invalid food ID" });
